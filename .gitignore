@@ -1,0 +1,42 @@
+# Compilados e Binários (Evita subir executáveis e objetos)
+*.o
+*.obj
+*.exe
+*.dll
+*.dylib
+*.a
+*.lib
+*.out
+*.elf
+*.hex
+*.bin
+
+# Pastas de Build (Dependendo da sua IDE, pode criar pastas como 'build' ou 'cmake-build-debug')
+build/
+cmake-build-*/
+*.so
+*.dll.a
+
+# Arquivos temporários do Sistema Operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Arquivos de IDE e Editores de Código
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.cproject
+*.sublime-project
+*.sublime-workspace
+
+# Logs e Relatórios de Compilação
+*.log
+core
+
+# Arquivos temporários de depuração
+*.pdb
