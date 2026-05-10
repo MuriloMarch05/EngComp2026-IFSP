@@ -4,7 +4,7 @@
  -> Nesse caso, faremos um programa semelhante ao do exercício anterior, porém, ao invés de fixar a linha e percorrer as colunas, fixaremos a coluna e percorreremos as linhas.
  ---------------------------------------------------------------------------------------------------------------------
  - IMPORTANTE
-  Não copie o cófigo do exercício anterior, faça um novo programa e utilize a mesma lógica, mas adaptando-a para o caso da coluna. 
+  Não copie o código do exercício anterior, faça um novo programa e utilize a mesma lógica, mas adaptando-a para o caso da coluna. 
   Digo isso pois quando mais você treina, melhor fica, então não custa nada refazer.*/
 
  #include <iostream>
