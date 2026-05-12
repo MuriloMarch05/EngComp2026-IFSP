@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-    int matriz[4][4], qtde=0;
+    int matriz[4][4], qtde=0; // Matriz 4x4 e variável para contar a quantidade de elementos maiores que 15, inicializada em 0.
     int l, c;
     
     cout << "Preencha a matriz 4x4 com inteiros: " << endl;
@@ -17,7 +17,7 @@ int main()
         {
             cin >> matriz[l][c];
             
-            if (matriz[l][c] > 15)
+            if (matriz[l][c] > 15) // Se o elemento atual for maior que 15, incrementamos a quantidade
             {
                 qtde++;
             }
