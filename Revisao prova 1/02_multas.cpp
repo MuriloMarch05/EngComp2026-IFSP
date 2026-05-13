@@ -51,7 +51,7 @@ int main()
     }
 
         cout << "Total arrecadado com multas: R$ " << totalArrecadado << endl;
-        cout << "Motorista com maior número de multas: " << carteiraMaior << " (Quantidade: )" << maiorQtd << ")" << endl;
+        cout << "Motorista com maior número de multas: " << carteiraMaior << endl;
 
     return 0;
 }
