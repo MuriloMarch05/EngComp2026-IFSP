@@ -7,7 +7,7 @@ Retorne a média calculada para o programa principal.*/
 #include <iomanip>
 using namespace std;
 
-void medias(double n1, double n2, double n3, char letra)
+double medias(double n1, double n2, double n3, char letra)
 {
     double media;
     
@@ -20,7 +20,7 @@ void medias(double n1, double n2, double n3, char letra)
         media = ((n1*5)+(n2*3)+(n3*2))/ (5 + 3 + 2);
     }
     
-    cout << "A média é: " << media << endl;
+    return media;
 }
 
 int main()
@@ -36,7 +36,7 @@ int main()
     cin >> letra;
     letra = toupper(letra);
     
-    medias(nota1,nota2,nota3,letra);
+    cout << "A média é: " << medias(nota1,nota2,nota3,letra) << endl;
     
     return 0;   
 }
