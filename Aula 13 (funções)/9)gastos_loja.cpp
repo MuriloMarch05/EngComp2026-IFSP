@@ -22,15 +22,16 @@ char menu()
 
     cout << "Opções:\nA -> À vista\nB -> 2x sem juros\nC -> 3-10x com 3% de juros/m\n";
     cin >> opcao;
-    opcao = toupper(opcao);
-    return opcao;
+    opcao = toupper(opcao); // Converte a opção para maiúscula para facilitar a comparação posteriormente.
+
+    return opcao; // Retorna a opção escolhida pelo usuário para ser utilizada no programa principal.
 }
 
 // Função para a opção A
 
 void opcaoA(double total)
 {
-    total = total*0.90;
+    total = total*0.90; // Calcula o valor com desconto de 10%
     cout << "Preço final com desconto de 10% à vista: R$ " << total;
 }
 
@@ -38,18 +39,18 @@ void opcaoA(double total)
 
 void opcaoB(double total)
 {
-    cout << "Preço final de R$"<< total <<" sem desconto em 2x de R$ " << total/2; 
+    cout << "Preço final de R$"<< total <<" sem desconto em 2x de R$ " << total/2; // Apenas mostra o valor total e o valor de cada parcela.
 }
 
 // Função para a opção C
 
-void opcaoC(double total, int parcelas)
+void opcaoC(double total, int parcelas) //  Nesse caso, precisamos passar o número de parcelas como parâmetro para a função.
 {  
     cout << "Quantas parcelas? (3-10x) ";
     cin >> parcelas;
 
     double juros;
-    juros = total*parcelas*0.03;
+    juros = total*parcelas*0.03; // Calcula o valor total do juros, considerando o valor total, o número de parcelas e a taxa.
     total = total + juros;
 
     cout << "Preço final de R$ " << total <<" parcelado em " << parcelas << "x de R$ " << total/parcelas << " com 3% de juros ao mês.";
@@ -62,11 +63,12 @@ int main()
     setlocale(LC_ALL, "Portuguese");
     double total;
 
-    cout << "Digite o total gasto: R$ ";
+    cout << "Digite o total gasto: R$ "; // Registramos o valor total gasto pelo cliente para ser utilizado nas funções de cálculo de acordo com a opção escolhida.
     cin >> total;
 
-    char escolha = menu();
+    char escolha = menu(); // Chamamos a função do menu.
 
+// Verificamos a opção escolhida e chamamos a função correspondente para realizar o cálculo e exibir o resultado.
     if (escolha == 'A')
     {
         opcaoA(total);
@@ -79,7 +81,7 @@ int main()
 
     else if (escolha == 'C')
     {
-        if (total < 100)
+        if (total < 100) // Verificamos se o valor total é menor que R$100,00, pois nesse caso a opção C não é válida.
         {
             cout << "Compras abaixo de R$100 não podem ser parceladas!";
         }
