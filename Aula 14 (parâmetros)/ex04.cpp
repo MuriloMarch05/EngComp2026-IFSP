@@ -15,9 +15,10 @@ float calcularMedia(const vector<float> &notas)
         soma += nota;
     }
 
-    return notas.empty() ? 0.0 : soma / notas.size(); // 
+    return notas.empty() ? 0.0 : soma / notas.size(); // Retorna a média, evitando divisão por zero.
 }
 
+// Função principal
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
@@ -27,7 +28,7 @@ int main()
     cout << "Digite a quantidade de notas: ";
     cin >> quantidade;
 
-    for (int i = 0; i<quantidade; i++)
+    for (int i = 0; i<quantidade; i++) // Loop para ler as notas dos alunos
     {
         float nota;
         cout << "Digite a nota do aluno " << (i+1) << ": ";
