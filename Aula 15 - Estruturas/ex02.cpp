@@ -8,17 +8,20 @@ da compra, ou seja, o preço final das 5 mercadorias adquiridas.*/
 #include <iomanip>
 using namespace std;
 
+// Definindo a estrutura para armazenar os dados das compras
 struct compras{
     string nome;
     double precoUnit;
     int qtde;
-}produtos[5];
+}produtos[5]; // Array de 5 elementos do tipo compras
 
+// Função principal
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
-    double total;
-    for (int i = 0; i<5; i++)
+    double total = 0.0; // Variável para armazenar o total da compra
+
+    for (int i = 0; i<5; i++) // Loop para ler os dados de cada mercadoria
     {
         cout << "Digite o nome da  mercadoria no." << i+1 << endl;
         cin >> produtos[i].nome;
@@ -29,7 +32,7 @@ int main()
         cout << "Quantidade comprada: ";
         cin >> produtos[i].qtde;
 
-        total += produtos[i].precoUnit*produtos[i].qtde;
+        total += produtos[i].precoUnit*produtos[i].qtde; // Calculando o preço total da compra e acumulando no total
     }
 
 
