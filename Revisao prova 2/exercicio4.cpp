@@ -11,55 +11,54 @@ valor investido.*/
 
 #include <iostream>
 #include <iomanip>
-#include <vector>
+#include <limits>
 using namespace std;
-
 
 struct criptomoeda
 {
     string nome;
     float quantidade;
-    float precoUnitarioUSD;
+    float precoUnit;
 
 }carteira[5];
 
 int main()
 {
-    setlocale(LC_ALL, "Portuguese");
-    float soma=0, moeda_maior=0;
-    string nome_maior;
-    for(int i=0; i<5; i++)
-    {
-        cout << "Digite o nome da criptomoeda: ";
-        cin >> carteira[i].nome;
-
-        cout << "Digite a quantidade: ";
-        cin >> carteira[i].quantidade;
-
-        cout << "Digite o preço unitário: ";
-        cin >> carteira[i].precoUnitarioUSD;
-
-        soma = soma + (carteira[i].quantidade*carteira[i].precoUnitarioUSD);
-
-    }
-
-    cout << "Soma de todas as criptomoedas: USD$ ";
-    cout << soma << endl;
+    cout << setprecision(2) << fixed;
+    float valor_total=0, maior_valor=0;
+    string maior_nome;
 
     for (int i = 0; i<5; i++)
     {
-        nome_maior = carteira[0].nome;
-        moeda_maior = carteira[0].precoUnitarioUSD*carteira[0].quantidade;
+        cout << "Nome da criptomoeda: ";
+        getline(cin, carteira[i].nome);
 
-        if (carteira[i].precoUnitarioUSD*carteira[i].quantidade > moeda_maior)
-        {
-            moeda_maior = carteira[i].precoUnitarioUSD*carteira[i].quantidade;
-            nome_maior = carteira[i].nome;
-        }
+        cout << "Quantidade: ";
+        cin >> carteira[i].quantidade;
+
+        cout << "Preço unitário: USD$ ";
+        cin >> carteira[i].precoUnit;
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        valor_total += carteira[i].quantidade*carteira[i].precoUnit;
+    
     }
 
-    cout << "A carteira poussi no total: USD$ " << soma << endl;
-    cout << "O maior valor investido está na criptomoeda: " << nome_maior << endl;
+    maior_valor = carteira[0].quantidade*carteira[0].precoUnit;
+    maior_nome = carteira[0].nome;
+
+    cout << "Valor total da carteira USD$ " << valor_total << endl;
+    
+    for (int i = 0; i<5; i++)
+    {
+        if (carteira[i].quantidade*carteira[i].precoUnit>maior_valor)
+        {
+            maior_valor = carteira[i].quantidade*carteira[i].precoUnit;
+            maior_nome = carteira[i].nome;
+        }
+    }
+    cout << "Criptomoeda com maior valor investido: " << maior_nome;
 
     return 0;
 }
