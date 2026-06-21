@@ -16,7 +16,7 @@ int main()
 {
     setlocale(LC_ALL, "Portuguese");
 
-    string numero, numero_limpo;
+    string numero, numero_limpo="";
 
     cout << "Digite seu número de telefone: ";
     getline(cin, numero);
