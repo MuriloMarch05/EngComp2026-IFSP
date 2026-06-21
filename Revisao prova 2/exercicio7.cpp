@@ -16,18 +16,20 @@ int main()
 {
     setlocale(LC_ALL, "Portuguese");
 
-    string numero;
+    string numero, numero_limpo;
 
-    cout << "Digite o seu número de telefone: ";
+    cout << "Digite seu número de telefone: ";
     getline(cin, numero);
 
     for (int i = 0; i <= numero.size(); i++)
     {
         if (isdigit(numero[i]) == true)
         {
-            cout << numero[i];
+            numero_limpo += numero[i];
         }
     }
 
+    cout << numero_limpo;
+    
     return 0;
 }
