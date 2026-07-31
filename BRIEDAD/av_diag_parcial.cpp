@@ -55,7 +55,7 @@ void Menu(Contato A[]){
 		cout << "[1] - Cadastrar" << endl;
 		cout << "[2] - Imprimir" << endl;
 		cout << "[3] - Sair" << endl;
-		cout << "Opção: ";
+		cout << "OpÃ§Ã£o: ";
 		cin >> Op;
 		//processamento
 		switch(Op){
@@ -66,14 +66,14 @@ void Menu(Contato A[]){
 				system("cls");
 				cout << "[1] - Total" << endl;
 				cout << "[2] - Parcial" << endl;
-				cout << "Opção: ";
+				cout << "OpÃ§Ã£o: ";
 				cin >> OpImp;
 				Imprimir(A, Tam, OpImp);
 				break;	
 			case 3:
 				break;
 			default:
-				cout << endl << "Opção inválida!!" << endl;
+				cout << endl << "OpÃ§Ã£o invÃ¡lida!!" << endl;
 		}
 				
 		system("pause");
