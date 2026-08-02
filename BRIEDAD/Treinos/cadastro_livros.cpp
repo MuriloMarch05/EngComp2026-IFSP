@@ -11,6 +11,7 @@ Exercício 1: Cadastro de Livros
 */
 
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 struct Livro{
@@ -63,11 +64,13 @@ void Menu(Livro B[]){
     int opcao, Tam = 0, opcaoTipo;
 
     do{
+        system("clear");
         cout << "[1] - Cadastrar" << endl;
         cout << "[2] - Imprimir" << endl;
         cout << "[3] - Sair" << endl;
         cout << "Opção: ";
         cin >> opcao;
+
 
         switch(opcao){
             
@@ -91,6 +94,10 @@ void Menu(Livro B[]){
             default:
                 cout << "Opção inválida." << endl;
         }
+        
+        cout << "Pressione ENTER para continuar...";
+        cin.ignore();
+        cin.get();
 
     }while(opcao!=3);
 
