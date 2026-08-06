@@ -79,6 +79,9 @@ void Menu(Livro B[]){
 
     do{
         system("clear");
+        cout << "------------------------------------" << endl;
+        cout << "BIBLIOTECA" << endl;
+        cout << "------------------------------------" << endl;
         cout << "[1] - Cadastrar" << endl;
         cout << "[2] - Imprimir" << endl;
         cout << "[3] - Buscar Livros" << endl;
@@ -120,7 +123,7 @@ void Menu(Livro B[]){
         cin.ignore();
         cin.get();
 
-    }while(opcao!=3);
+    }while(opcao!=4);
 
 }
 
