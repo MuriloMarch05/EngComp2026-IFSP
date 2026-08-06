@@ -15,7 +15,7 @@ Exercício 1: Cadastro de Livros
 using namespace std;
 
 struct Livro{
-    string Titulo, Autor;
+    string Titulo, Autor, Categoria;
     int Ano;
     float Preco;
 };
@@ -28,6 +28,8 @@ int Cadastrar(Livro B[], int Tam){
     cin >> B[Tam].Titulo;
     cout << "Autor[" << Tam << "]: ";
     cin >> B[Tam].Autor;
+    cout << "Categoria[" << Tam << "]: ";
+    cin >> B[Tam].Categoria;
     cout << "Ano[" << Tam << "]: ";
     cin >> B[Tam].Ano;
     cout << "Preço[" << Tam << "]: ";
@@ -44,6 +46,7 @@ void ImprimirReg(Livro B[], int Pos, int Tipo){
 
     cout << "Título[" << Pos << "]: " << B[Pos].Titulo << endl;
     cout << "Autor[" << Pos << "]: " << B[Pos].Autor << endl;
+    cout << "Categoria["<< Pos << "]: " << B[Pos].Categoria << endl;
         
     if (Tipo==1){
         cout << "Ano[" << Pos << "]: " << B[Pos].Ano << endl;
@@ -60,14 +63,26 @@ void ImprimirVetor(Livro B[], int Tam, int Tipo){
     }
 }
 
+
+void BuscarLivro(Livro B[], int Tam, string Categoria){
+    int cont;
+    for(cont=0;cont<Tam;cont++){
+        if(B[cont].Categoria == Categoria){
+            ImprimirReg(B, cont, 1);
+        }
+    }
+}
+
 void Menu(Livro B[]){
     int opcao, Tam = 0, opcaoTipo;
+    string categ;
 
     do{
         system("clear");
         cout << "[1] - Cadastrar" << endl;
         cout << "[2] - Imprimir" << endl;
-        cout << "[3] - Sair" << endl;
+        cout << "[3] - Buscar Livros" << endl;
+        cout << "[4] - Sair" << endl;
         cout << "Opção: ";
         cin >> opcao;
 
@@ -89,6 +104,12 @@ void Menu(Livro B[]){
                 break;
 
             case 3:
+                cout << "Qual categoria?: ";
+                cin >> categ;
+                BuscarLivro(B, Tam, categ);
+                break;
+
+            case 4:
                 break;
 
             default:
