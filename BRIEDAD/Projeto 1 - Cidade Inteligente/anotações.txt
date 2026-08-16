@@ -1,0 +1,9 @@
+- Fazer login para usuário (admin ou civil)
+|-> Menu muda de acordo com funções/permissões
+
+- Permitir que civil visualize o estado atual de suas denúncias (organizadas por ID)
+
+- Não pode usar string, tem que usar vetor de caracteres
+|-> Deve ser baseado no formato do C
+
+strcpy, strcmp, strlen, strcat
