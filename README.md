@@ -2,7 +2,7 @@
 
 **Curso:** Engenharia de Computação  
 **Instituição:** IFSP - Campus Birigui  
-**Disciplina:** Algoritmos e Lógica de Programação  
+**Disciplina:** Algoritmos e Lógica de Programação / Estrutura de Dados  
 **Linguagem:** C++
 
 ## Objetivo
