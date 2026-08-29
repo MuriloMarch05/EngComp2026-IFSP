@@ -16,10 +16,10 @@ void maiorEndereco(int *p_int1, int *p_int2){
     cout << "------------------------------\n";
 
     if (p_int1 > p_int2){
-        cout << "O endereço do primeiro inteiro["<< *p_int1 << "]é maior." << endl;
+        cout << "O endereço do primeiro inteiro["<< *p_int1 << "] é maior." << endl;
     }
     else if (p_int1 < p_int2){
-        cout << "O endereço do segundo inteiro ["<< *p_int2 << "]é maior. " << endl;
+        cout << "O endereço do segundo inteiro ["<< *p_int2 << "] é maior. " << endl;
     }
     else{
         cout << "Os endereços de [" <<  *p_int1 << "] e [" << *p_int2 << "], são iguais." << endl; 
