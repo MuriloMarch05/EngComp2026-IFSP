@@ -7,3 +7,10 @@
 |-> Deve ser baseado no formato do C
 
 strcpy, strcmp, strlen, strcat
+
+
+
+-----------------------------------------------------
+BUGS - PROTOTIPO 1
+
+- 
