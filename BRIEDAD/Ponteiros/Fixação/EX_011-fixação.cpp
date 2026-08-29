@@ -8,36 +8,36 @@ Utilizando ponteiros, leia três números e os imprima em ordem crescente. O pro
 #include <clocale>
 using namespace std;
 
-void ordenar(int *pint1, int *pint2, int *pint3){
+void ordenar(int *p_int1, int *p_int2, int *p_int3){
 
     int aux=0;
 
-    if (*pint1 > *pint2){
-        aux = *pint1;
-        *pint1 = *pint2;
-        *pint2 = aux;
+    if (*p_int1 > *p_int2){
+        aux = *p_int1;
+        *p_int1 = *p_int2;
+        *p_int2 = aux;
     }
 
-    if (*pint1 > *pint3){
-        aux = *pint1;
-        *pint1 = *pint3;
-        *pint3 = aux;
+    if (*p_int1 > *p_int3){
+        aux = *p_int1;
+        *p_int1 = *p_int3;
+        *p_int3 = aux;
     }
 
-    if (*pint2 > *pint3){
-        aux = *pint2;
-        *pint2 = *pint3;
-        *pint3 = aux;
+    if (*p_int2 > *p_int3){
+        aux = *p_int2;
+        *p_int2 = *p_int3;
+        *p_int3 = aux;
     }
     
 }
 
-void imprimir(int *pint1, int *pint2, int *pint3){
+void imprimir(int *p_int1, int *p_int2, int *p_int3){
 
     cout << "=== NÚMEROS EM ORDEM CRESCENTE ===" << endl;
-    cout << "[1]: "<< *pint1 << " -> Endereço de memória: "<< pint1 << endl;
-    cout << "[2]: "<< *pint2 << " -> Endereço de memória: "<< pint2 << endl;
-    cout << "[3]: "<< *pint3 << " -> Endereço de memória: "<< pint3 << endl;
+    cout << "[1]: "<< *p_int1 << " -> Endereço de memória: "<< p_int1 << endl;
+    cout << "[2]: "<< *p_int2 << " -> Endereço de memória: "<< p_int2 << endl;
+    cout << "[3]: "<< *p_int3 << " -> Endereço de memória: "<< p_int3 << endl;
 }
 
 int main(){
@@ -47,11 +47,11 @@ int main(){
     //Variáveis
     int int1=0, int2=0, int3=0;
     // Ponteiros
-    int *pint1, *pint2, *pint3;
+    int *p_int1, *p_int2, *p_int3;
     // Ponteiros recebem endereços
-    pint1 = &int1;
-    pint2 = &int2;
-    pint3 = &int3;
+    p_int1 = &int1;
+    p_int2 = &int2;
+    p_int3 = &int3;
 
     // Cadastro
     cout << "=== CADASTRE 3 NÚMEROS INTEIROS === " << endl;
@@ -65,8 +65,8 @@ int main(){
         cout << "Número[3]: ";
         cin >> int3;
 
-    ordenar(pint1, pint2, pint3); // Organiza em ordem crescente. 
-    imprimir(pint1, pint2, pint3); // Imprime já ordenado.
+    ordenar(p_int1, p_int2, p_int3); // Organiza em ordem crescente. 
+    imprimir(p_int1, p_int2, p_int3); // Imprime já ordenado.
 
     return 0;
 }
