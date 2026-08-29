@@ -54,7 +54,7 @@ int main(){
 
     }while(frase.size() > 50);
     
-    p_frase = &frase[0];
+    p_frase = &frase[0]; // O ponteiro recebe o endereço de memória do primeiro elemento da string frase.
 
     cout << "A frase possui " << verificarFrase(p_frase, op) << " caracteres." << endl;
 
