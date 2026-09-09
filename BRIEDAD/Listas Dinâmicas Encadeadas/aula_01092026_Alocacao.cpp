@@ -7,70 +7,133 @@ using namespace std;
 struct Ocorrencia{
 	int Codigo;
 	char Descricao[20];
+	Ocorrencia *prox;
+};
+//Header
+struct Lista{
+	Ocorrencia *inicio;
+	int Total;
 };
 
-/*int Funcao(){
-	static int X=0;
-	
-	++X;
-	
-	cout << X << endl;
-	
-	return X;	
-}*/
+//Inicializacao da lista, lista vazia, inserção, busca e remoção;
 
+void inicializar(Lista *L){
+	L->inicio = NULL;
+	L->Total = 0;
+	
+}
+
+bool Lista_vazia(Lista *L){
+	return (L->inicio == NULL);
+	
+}
 Ocorrencia * Cria_Ocorrencia(int Codigo, const char* Desc){
 	Ocorrencia *Ret;
 	Ret = (Ocorrencia *) malloc(sizeof(Ocorrencia));
 	if (Ret!=NULL){
 		Ret->Codigo = Codigo;
-		strcpy(Ret->Descricao, Desc);			
+		strcpy(Ret->Descricao, Desc);
+		Ret->prox = NULL;			
 	}
 	
 	return Ret;
 }
 
-
-//int X=10, V[5];
-int *pX;
-Ocorrencia VOc[10], *Oc;
-int main(){
-	setlocale(LC_ALL, "Portuguese");
-
-	/*Funcao();
-	Funcao();
-	Funcao();*/
-	//cout << ((float) 5)/3; //convers�o de tipos (cast)
+void Insere_ocorrencia(Lista *L, int Codigo, const char* Desc){
+	Ocorrencia *ptO;
 	
-	/*pX = (int *) malloc(4);
-	*pX = 10;
+	ptO = Cria_Ocorrencia(Codigo, Desc);
 	
-	cout << *pX;*/
-	
-	//Ponteiro acessando vetor est�tico
-	//Oc = (Ocorrencia *) malloc(10*sizeof(Ocorrencia));
-	/*Oc = VOc+1;
-	(*Oc).Codigo = 10;
-	strcpy(Oc->Descricao, "Buraco");
-	
-	cout << (Oc+1)->Codigo << " - " << VOc[1].Descricao;*/
-	
-	//alocando e acessando o vetor din�mico
-	
-	
-/*	Oc = (Ocorrencia *) calloc(10,sizeof(Ocorrencia));
-	if (Oc!=NULL){
-		(*Oc).Codigo = 20;
-		strcpy(Oc->Descricao, "Buraco calloc");
+	if (ptO != NULL){ // insere na cabe�a
+		ptO->prox = L->inicio;
+		L->inicio = ptO;
 		
-		cout << (Oc)->Codigo << " - " << Oc[0].Descricao << endl;
+		++L->Total;
+	}
+}
+
+void Remover(Lista *L, int Codigo){
+	Ocorrencia *ptO, *aux;
+	
+	if (!Lista_vazia(L)){
+		ptO = L->inicio;
+		if (L->inicio->Codigo == Codigo){
+			// Atualiza o header
+			L->inicio = L->inicio->prox;
+			free(ptO);
+		}
+		else{ // Atualiza o meio
+			while(ptO->prox != NULL && ptO->prox->Codigo != Codigo){
+				ptO = ptO->prox;
+			}
+			
+			if (ptO->prox){ // Atualizar ligações
+				aux = ptO->prox;
+				ptO->prox = ptO->prox->prox;
+				free(aux);
+				--L->Total;
+			}
+		}
+	}
+}
+
+
+Ocorrencia * Buscar(Lista *L, int Codigo){
+	Ocorrencia *ptO, *Pos=NULL; // Ocorrência não encontrada 
+	
+	for (ptO = L->inicio; ptO!=NULL && Pos == NULL; ptO = ptO->prox){
+		if(ptO->Codigo == Codigo){
+			Pos = ptO;
+		}
 	}
 	
-	free(Oc);
-	cout << (Oc)->Codigo << " - " << Oc[0].Descricao << endl;*/
+	return Pos;
+}
+void Imprimir(Ocorrencia *V){
+	Ocorrencia *ptO;
 	
-	Oc =  Cria_Ocorrencia(10, "Buraco");
-	cout << Oc->Codigo << " - " << Oc->Descricao << endl;		
+	for (ptO = V; ptO!=NULL; ptO = ptO->prox){
+		cout << ptO->Codigo << "(" << ptO->Descricao << ")" << endl;
+	}
+	
+}
 
+int Contar_Elementos(Ocorrencia *V){
+	Ocorrencia *ptO;
+	int Total = 0;
+	
+	for(ptO=V; ptO!=NULL; ptO=ptO->prox){
+		++Total;
+	}
+	
+	return Total;
+}
+
+Lista Lst;
+Ocorrencia *ptO;
+int main(){
+	setlocale(LC_ALL, "Portuguese");
+	
+	inicializar (&Lst);
+	Insere_ocorrencia(&Lst, 1, "Buraco");
+	Insere_ocorrencia(&Lst, 2, "Ilumina��o");
+	Insere_ocorrencia(&Lst, 3, "Acidente");
+	Insere_ocorrencia(&Lst, 4, "Buraco 2");
+	Insere_ocorrencia(&Lst, 5, "Ilumina��o 2");
+	Insere_ocorrencia(&Lst, 6, "Acidente 2");
+	Imprimir(Lst.inicio);
+	cout << "\nTotal: " << Lst.Total;
+	
+	/*ptO = Buscar(&Lst, 4);
+	if (ptO){
+		cout << endl <<"Ocorrencia: " << ptO->Descricao << " encontrada!";
+	}
+	else{
+		cout << "\nOcorrencia nao encontrada!";
+	}*/
+	
+	Remover(&Lst, 4);
+	Imprimir(Lst.inicio);
+	
 	return 0;
 }
