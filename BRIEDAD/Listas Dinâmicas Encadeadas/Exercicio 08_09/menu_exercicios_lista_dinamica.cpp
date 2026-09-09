@@ -125,6 +125,21 @@ int Comprimento_Lista(Lista *L){ // Retorna o número de elementos da lista
 	return cont;
 }
 
+int Contar_Valor(Lista *L, int N){
+	Item *Atual;
+	int cont=0;
+
+	Atual = L->Inicio;
+
+	while(Atual != NULL){
+		if (Atual->Valor == N){
+			cont++;
+		}
+	}
+
+	return cont;
+}
+
 Lista* Selecionar_Lista(Lista *L1, Lista *L2){// Permite ao usuário selecionar uma das duas listas
 	int Op;
 	Lista *L;// Ponteiro para a lista selecionada
@@ -174,6 +189,8 @@ void Menu(Lista *L1, Lista *L2){// Função menu para interagir com o usuário
 		cout << "2 - Excluir da lista (Lista 1 ou Lista 2)"<< endl;
 		cout << "3 - Imprimir"<< endl;
 		cout << "4 - Comprimento da lista (Lista 1 ou Lista 2)" << endl;
+		cout << "5 - Contar ocorrências (Lista 1 ou Lista 2)" << endl;
+		cout << "6-  Trocar valores (Lista 1 ou Lista 2)" << endl;
 		cout << "7 - Dividir uma lista em duas (Lista 1 ou Lista 2)"<< endl;
 		cout << "8 - Intersecção das listas"<< endl;
 		cout << "0 - Sair"<< endl;
@@ -216,6 +233,11 @@ void Menu(Lista *L1, Lista *L2){// Função menu para interagir com o usuário
 				break;
 
 			case 5:
+				cout << "----------------- CONTAR OCORRÊNCIAS -----------------" << endl;
+				L = Selecionar_Lista(L1, L2);
+				cout << "Digite um valor para contar as ocorrências: ";
+				cin >> Valor;
+				cout << "Quantidade de ocorrencias do valor " << Valor << " na lista escolhida: " << Contar_Valor(L, Valor) << endl;
 
 			case 6:
 
