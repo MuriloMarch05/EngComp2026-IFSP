@@ -139,14 +139,14 @@ int Comprimento_Lista(Lista *L){ // Retorna o número de elementos da lista
 	return cont;
 }
 
-int Contar_Valor(Lista *L, int N){
-	Item *Atual;
-	int cont=0;
+int Contar_Valor(Lista *L, int N){ // Conta quantas vezes um valor aparece na lista
+	Item *Atual; // Ponteiro para percorrer a lista
+	int cont=0; 
 
-	Atual = L->Inicio;
+	Atual = L->Inicio; // Inicializa o ponteiro atual como o início da lista
 
 	while(Atual != NULL){
-		if (Atual->Valor == N){
+		if (Atual->Valor == N){ // Se o valor do item atual for igual a N, incrementa o contador
 			cont++;
 		}
 	}
@@ -296,13 +296,13 @@ Lista *L1, *L2;// Ponteiros para as duas listas
 int main(){	
 	setlocale(LC_ALL,"Portuguese");
 	
-	L1 = Criar_Lista();
-	Ini_Lista(L1);
+	L1 = Criar_Lista(); // Cria a Lista 1 na memória
+	Ini_Lista(L1); // Inicializa a Lista 1
 	
-	L2 = Criar_Lista();
-	Ini_Lista(L2);
+	L2 = Criar_Lista(); // Cria a Lista 2 na memória
+	Ini_Lista(L2);// Inicializa a Lista 2
 	
-	Menu(L1, L2);
+	Menu(L1, L2); // Chama a função menu para interagir com o usuário
 
 	return 0;
 }
