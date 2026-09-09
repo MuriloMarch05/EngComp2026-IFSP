@@ -10,7 +10,13 @@
 4.2	- Inserir item no in�cio 
 4.2.1 - prox do item aponta para o in�cio 
 4.2.2 - início aponta pro item
-4 - Função de remoção ...		
+4 - Função de remoção ...	
+
+
+
+LEMBRANDO: "->" é usado para acessar membros de uma estrutura através de um ponteiro, enquanto "." é usado para acessar membros de uma estrutura diretamente.
+"->" pode ser entendido como: "pegue o ponteiro, vá para a estrutura que ele aponta e acesse o membro".
+
 */
 
 #include <iostream>
