@@ -6,17 +6,31 @@
 3 - Função menu
 3.1 - Mostrar as opções dentro de um loop (do..while) com opção de saída
 4 - Função de inserção (Exemplo de algoritmo)
-4.1 - Criar o item na mem�ria e gravar o valor: retorna o ponteiro pro item
-4.2	- Inserir item no in�cio 
-4.2.1 - prox do item aponta para o in�cio 
+4.1 - Criar o item na memória e gravar o valor: retorna o ponteiro pro item
+4.2	- Inserir item no início 
+4.2.1 - prox do item aponta para o início 
 4.2.2 - início aponta pro item
 4 - Função de remoção ...	
-
-
-
+---------------------------------------------------------------------------------------------------------
 LEMBRANDO: "->" é usado para acessar membros de uma estrutura através de um ponteiro, enquanto "." é usado para acessar membros de uma estrutura diretamente.
 "->" pode ser entendido como: "pegue o ponteiro, vá para a estrutura que ele aponta e acesse o membro".
 
+Esta atividade trabalha principalmente:
+
+- Ponteiros;
+- Endereços de memória;
+- Alocação dinâmica;
+- `malloc`;
+- `free`;
+- Estruturas (`struct`);
+- Listas encadeadas;
+- Nós;
+- Ponteiro para o próximo nó;
+- Percorrimento de listas;
+- Inserção;
+- Remoção;
+- Busca;
+- Criação de novas listas.
 */
 
 #include <iostream>
