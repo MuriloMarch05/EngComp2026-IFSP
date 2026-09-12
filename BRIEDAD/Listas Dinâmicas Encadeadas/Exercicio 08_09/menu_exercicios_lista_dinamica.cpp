@@ -15,7 +15,7 @@
 LEMBRANDO: "->" é usado para acessar membros de uma estrutura através de um ponteiro, enquanto "." é usado para acessar membros de uma estrutura diretamente.
 "->" pode ser entendido como: "pegue o ponteiro, vá para a estrutura que ele aponta e acesse o membro".
 
-Esta atividade trabalha principalmente:
+Essa atividade trabalha principalmente:
 
 - Ponteiros;
 - Endereços de memória;
@@ -73,18 +73,18 @@ Lista* Criar_Lista(){ // Cria a lista na memória e inicializa
 }
 
 void Liberar_Lista(Lista *L){
-	Item *Atual;
-	Item *Prox;
+	Item *Atual; // Ponteiro para percorrer a lista
+	Item *Prox; // Guarda o próximo antes de liberar o atual
 
 	Atual = L->Inicio;
 
 	while(Atual != NULL){
-		Prox = Atual->Prox;
-		free(Atual);
-		Atual = Prox;
+		Prox = Atual->Prox; // Salva o próximo antes de liberar
+		free(Atual); // Libera o nó atual
+		Atual = Prox; // Avança para o próximo
 	}
 
-	L->Inicio = NULL;
+	L->Inicio = NULL; // Esvazia a lista
 
 }
 
@@ -210,41 +210,41 @@ void Imprimir_Lista(Lista *L){ // Imprime os elementos da lista
 }
 
 void Trocar_Valor(Lista *L, int Valor, int Valor_Novo){
-	Item *Atual;
+	Item *Atual; // Ponteiro para percorrer a lista
 
-	Atual = L->Inicio;
+	Atual = L->Inicio;  // Começa do inicio
 
 	while(Atual != NULL){
-		if(Atual->Valor == Valor){
-			Atual->Valor = Valor_Novo;
+		if(Atual->Valor == Valor){ // Se achou o valor original
+			Atual->Valor = Valor_Novo; // Substitui pelo novo
 		}
-		Atual = Atual->Prox;
+		Atual = Atual->Prox; // Avança (troca TODAS as ocorrências)
 	}
 
-	cout << "Lista após troca: ";
-	Imprimir_Lista(L);
+	cout << "Lista após troca: "; 
+	Imprimir_Lista(L); // Imprime após a troca
 
 }
 
 void Dividir_Lista(Lista *L, int N){
-	Lista *Maiores, *Menores;
-	Item *Atual;
+	Lista *Maiores, *Menores; // Duas listas de saída
+	Item *Atual; // Ponteiro para percorrer a original
 
-	Maiores = Criar_Lista();
-	Menores = Criar_Lista();
+	Maiores = Criar_Lista(); // Cria a lista dos maiores (> N)
+	Menores = Criar_Lista(); // Cria a lista dos menores (< N)
 
 	Atual = L->Inicio;
 
 	while(Atual != NULL){
 
 		if(Atual->Valor > N){
-			Inserir_Item(Maiores, Atual->Valor);
+			Inserir_Item(Maiores, Atual->Valor); // Vai pra Maiores
 		}
 		else{
 			if (Atual->Valor < N){
-				Inserir_Item(Menores, Atual->Valor);
+				Inserir_Item(Menores, Atual->Valor); // Vai pra Menores
 			}
-		}
+		} // Se == N, não entra em nenhuma
 		Atual = Atual->Prox;
 	}
 
@@ -254,37 +254,37 @@ void Dividir_Lista(Lista *L, int N){
 	Imprimir_Lista(Menores);
 
 	Liberar_Lista(Maiores); // Libera os nós
-	free(Maiores); // Libera a lista
+	free(Maiores); // Libera a struct Lista
 	Liberar_Lista(Menores);
 	free(Menores);
 
 }
 
 int Existe_Valor(Lista *L, int Valor){
-	Item *Atual;
+	Item *Atual; // Ponteiro para percorrer
 
 	Atual = L->Inicio;
 
 	while(Atual != NULL){
 		if (Atual->Valor == Valor){
-			return 1;
+			return 1; // Achou
 		}
 
 		Atual = Atual->Prox;
 
 	}
-	return 0;
+	return 0; // Não achou
 }
 
 Lista* Inter_Lista(Lista *L1, Lista *L2){
-	Item *Atual;
-	Lista *Resultante;
+	Item *Atual; // Percorre a L1
+	Lista *Resultante; // Lista que vai guardar a interseção
 
 	Atual = L1->Inicio;
 	Resultante = Criar_Lista();
 
 	while(Atual != NULL){
-		 // existe na outra lista e ainda não foi inserido no resultado
+		 // Existe na outra lista e ainda não foi inserido no resultado
 		if(Existe_Valor(L2, Atual->Valor) && !Existe_Valor(Resultante, Atual->Valor)){
 			Inserir_Item(Resultante, Atual->Valor);
 		}
@@ -292,13 +292,13 @@ Lista* Inter_Lista(Lista *L1, Lista *L2){
 		Atual = Atual->Prox;
 	}
 
-	return Resultante;
+	return Resultante; // Retorna a nova lista
 }
 
 void Menu(Lista *L1, Lista *L2){// Função menu para interagir com o usuário
 	int Op, Valor, Valor_Novo;// Variáveis para armazenar a opção do usuário e o valor a ser inserido ou removido
 	Lista* L;// Ponteiro para a lista selecionada
-	Lista *L_Inter;
+	Lista *L_Inter; // Guarda o resultado da interseção (pra poder liberar depois)
 	do{
 		system("clear");
 		cout << "----------------- TESTE DE OPERAÇÕES COM LISTAS -----------------" << endl;
@@ -408,8 +408,8 @@ void Menu(Lista *L1, Lista *L2){// Função menu para interagir com o usuário
 				cout << "Itens comuns: " ;
 				Imprimir_Lista(L_Inter);
 
-				Liberar_Lista(L_Inter);
-				free(L_Inter);
+				Liberar_Lista(L_Inter); //  Libera os nós da interseção
+				free(L_Inter); // Libera a struct Lista
 
 				cout << endl << "Pressione ENTER para continuar...";
 				cin.ignore();   // limpa o \n deixado pelo cin anterior
@@ -444,10 +444,10 @@ int main(){
 	
 	Menu(L1, L2); // Chama a função menu para interagir com o usuário
 
-	Liberar_Lista(L1);
-	free(L1);
-	Liberar_Lista(L2);
-	free(L2);
+	Liberar_Lista(L1); // Libera os nós da lista 1
+	free(L1); // Libera a struct Lista 1
+	Liberar_Lista(L2); // Libera os nós da lista 2
+	free(L2); // Libera a struct Lista 2
 
 	return 0;
 }
