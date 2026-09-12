@@ -307,7 +307,7 @@ void Menu(Lista *L1, Lista *L2){// Função menu para interagir com o usuário
 		cout << "3 - Imprimir"<< endl;
 		cout << "4 - Comprimento da lista" << endl;
 		cout << "5 - Contar ocorrências" << endl;
-		cout << "6 -  Trocar valores" << endl;
+		cout << "6 - Trocar valores" << endl;
 		cout << "7 - Dividir uma lista em duas"<< endl;
 		cout << "8 - Intersecção das listas"<< endl;
 		cout << "0 - Sair"<< endl;
@@ -377,7 +377,7 @@ void Menu(Lista *L1, Lista *L2){// Função menu para interagir com o usuário
 				cout << "Valor novo: ";
 				cin >> Valor_Novo;
 				Trocar_Valor(L, Valor, Valor_Novo);
-				
+
 				cout << endl << "Pressione ENTER para continuar...";
 				cin.ignore();   // limpa o \n deixado pelo cin anterior
 				cin.get();      // espera ENTER
