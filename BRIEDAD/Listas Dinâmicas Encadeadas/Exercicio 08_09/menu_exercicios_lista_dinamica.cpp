@@ -406,7 +406,7 @@ void Menu(Lista *L1, Lista *L2){// Função menu para interagir com o usuário
 				Imprimir_Lista(L2);						
 				L_Inter = Inter_Lista(L1, L2);
 				cout << "Itens comuns: " ;
-				Imprimir_Lista(L);
+				Imprimir_Lista(L_Inter);
 
 				Liberar_Lista(L_Inter);
 				free(L_Inter);
