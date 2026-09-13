@@ -12,25 +12,6 @@
 4.2.2 - início aponta pro item
 4 - Função de remoção ...	
 ---------------------------------------------------------------------------------------------------------
-LEMBRANDO: "->" é usado para acessar membros de uma estrutura através de um ponteiro, enquanto "." é usado para acessar membros de uma estrutura diretamente.
-"->" pode ser entendido como: "pegue o ponteiro, vá para a estrutura que ele aponta e acesse o membro".
-
-Essa atividade trabalha principalmente:
-
-- Ponteiros;
-- Endereços de memória;
-- Alocação dinâmica;
-- `malloc`;
-- `free`;
-- Estruturas (`struct`);
-- Listas encadeadas;
-- Nós;
-- Ponteiro para o próximo nó;
-- Percorrimento de listas;
-- Inserção;
-- Remoção;
-- Busca;
-- Criação de novas listas.
 */
 
 #include <iostream>
