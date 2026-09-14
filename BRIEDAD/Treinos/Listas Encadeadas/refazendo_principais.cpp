@@ -73,9 +73,10 @@ void Imprimir_Lista(Lista *L){ // Passamos a lista como parametro
 
     Atual = L->Inicio; // lembrando, aqui a gente faz o ponteiro Atual receber o começo da lista
     while(Atual != NULL){
-        cout << Atual->Valor << " " << endl; // imprimimos
+        cout << Atual->Valor << " "; // imprimimos
         Atual = Atual->Prox; // vamos passando de item em item
     }
+    cout << endl;
 }
 
 // Pronto, a parte básica de listas a gente já fez. Ainda tem outra funcoes que podemos precisar, mas as essenciais sao essas.
@@ -141,41 +142,63 @@ void Remover_Item(Lista *L, int Valor){
     }
 
 }
-
+// Agora, vamos testar as funcoes que criamos
 int main() {
-    // 1. Criar e inicializar a lista
-    Lista *minhaLista = Criar_Lista();
+    setlocale(LC_ALL, "Portuguese");
 
-    // 2. Testar se está vazia
-    if (Lista_Vazia(minhaLista)) {
-        cout << "A lista esta vazia!" << endl;
+    // Criar uma e inicializar uma lista
+    Lista *Lista1;
+    // Chamamos a funcao de criacao
+    Lista1 = Criar_Lista();
+    
+    // Testando se está vazia
+    if(Lista_Vazia(Lista1) == 1){
+        cout << "A lista está vazia." << endl;
     }
 
-    // 3. Inserir elementos (como insere no início, a ordem final impressa será invertida)
-    Inserir_Item(minhaLista, 10);
-    Inserir_Item(minhaLista, 20);
-    Inserir_Item(minhaLista, 30);
+    // Inserir elementos
+    Inserir_Item(Lista1, 10);
+    Inserir_Item(Lista1, 20);
+    Inserir_Item(Lista1, 30);
+    Inserir_Item(Lista1, 40);
 
-    cout << "\n--- Conteudo da Lista ---" << endl;
-    Imprimir_Lista(minhaLista);
+    // Imprimir a lista
+    cout << "===== CONTEUDO DA LISTA =====" << endl;
+    Imprimir_Lista(Lista1);
 
-    // 4. Remover um item do meio/início
-    cout << "\nRemovendo o valor 20..." << endl;
-    Remover_Item(minhaLista, 20);
+    // Testando de novo se esta vazia
+    if(Lista_Vazia(Lista1) == 1){
+        cout << "Ainda ta vazia." << endl;
+    }
+    else{
+        cout << "Tem elementos." << endl;
+    }
 
-    cout << "\n--- Conteudo da Lista apos remocao ---" << endl;
-    Imprimir_Lista(minhaLista);
+    // Removendo um item do inicio
+    Remover_Item(Lista1, 40);
+    cout << "===== LISTA APOS REMOCAO DO PRIMEIRO ITEM ====="<< endl;
+    Imprimir_Lista(Lista1);
 
-    // 5. Testar remoção de valor inexistente
-    cout << "\nTentando remover o valor 99..." << endl;
-    Remover_Item(minhaLista, 99);
+    // Removendo item do meio
+    Remover_Item(Lista1, 20);
+    cout << "===== LISTA APOS REMOCAO DE UM ITEM NO MEIO ====="<< endl;
+    Imprimir_Lista(Lista1);
 
-    // 6. Liberar a memória dos nós e do nó descritor
-    Liberar_Lista(minhaLista);
-    free(minhaLista); // Libera o ponteiro do cabeçalho alocado no Criar_Lista
-    minhaLista = NULL;
+    // Removendo item do fim
+    Remover_Item(Lista1, 10);
+    cout << "===== LISTA APOS REMOCAO DE UM ITEM NO FIM ====="<< endl;
+    Imprimir_Lista(Lista1);
 
-    cout << "\nMemoria liberada com sucesso!" << endl;
+    // Tentando remover valor que nao tem
+    Remover_Item(Lista1, 99);
+
+
+    // Liberar memória dos nós
+    Liberar_Lista(Lista1);
+    free(Lista1);
+    Lista1 = NULL;
+
+    cout << "Memoria liberada com sucesso." << endl;
 
     return 0;
 }
