@@ -38,7 +38,7 @@ struct Regiao{
 Regiao cidade[LINHAS][COLUNAS];  // Matriz de regioes
 int proximo_id = 1;              // Contador global de IDs
 
-// LISTA - funcoes basicas (copiei do professor valtemir)
+// LISTA - funcoes basicas (mesmas da atividade do professor valtemir)
 void Ini_Lista(Lista *L){ // Inicializa a lista vazia
     L->Inicio = NULL;
 }
@@ -73,9 +73,7 @@ void Liberar_Lista(Lista *L){ // Libera os nos da lista (nao a struct)
 }
 
 // EVENTO - criar, inserir, buscar, remover, imprimir
-Evento* Criar_Evento(const char tipo[], const char descricao[],
-                     const char rua[], int numero, int locx, int locy)
-{
+Evento* Criar_Evento(const char tipo[], const char descricao[],const char rua[], int numero, int locx, int locy){
     Evento *E;
     E = (Evento*) malloc(sizeof(Evento));
 
