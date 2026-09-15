@@ -246,6 +246,74 @@ void Cadastro_Civil(){
     }
 }
 
+// Troca o conteudo de dois nós (Não mexe nos ponteiros Prox)
+// Os nós continuam nas mesma posicoes físicas da lista
+
+void Trocar_Conteudo(Evento *A, Evento *B){
+    int aux_int;
+    //ID
+    aux_int = A->id;
+    A->id = B->id;
+    B->id = aux_int;
+    //Prioridade
+    aux_int = A->prioridade;
+    A->prioridade = B->prioridade;
+    B->prioridade = aux_int;
+    //Status
+    aux_int = A->status;
+    A->status = B->status;
+    B->status = aux_int;
+    //Coordenadas
+    aux_int = A->locx;
+    A->locx = B->locx;
+    B->locx = aux_int;
+    aux_int = A->locy;
+    A->locy = B->locy;
+    B->locy = aux_int;
+    // Endereco
+    aux_int = A->endereco.numero;
+    A->endereco.numero = B->endereco.numero;
+    B->endereco.numero = aux_int;
+    // Strings
+    char aux_str[100];
+
+    strcpy(aux_str, A->tipo);
+    strcpy(A->tipo, B->tipo);
+    strcpy(B->tipo, aux_str);
+
+    strcpy(aux_str, A->descricao);
+    strcpy(A->descricao, B->descricao);
+    strcpy(B->descricao, aux_str);
+
+    strcpy(aux_str, A->endereco.rua);
+    strcpy(A->endereco.rua, B->endereco.rua);
+    strcpy(B->endereco.rua, aux_str);
+}
+// Ordenar a lista por prioridade decrescente
+// Bubble sort trocando conteudo dos nós
+void Ordenar_Regiao(Lista *L){
+    if(L->Inicio == NULL || L->Inicio->Prox == NULL){
+        return;
+    }
+
+    int trocou;
+    do{
+        trocou = 0;
+        Evento *Atual = L->Inicio;
+
+        // Percorre ate o penultimo
+        while (Atual->Prox != NULL){
+            // Se a prioridade do atual for MENOR que a do proximo, estao fora de ordem (maior primeiro) -> troca
+            if(Atual->prioridade < Atual->Prox->prioridade){
+                Trocar_Conteudo(Atual, Atual->Prox);
+                trocou = 1;
+            }
+            Atual = Atual->Prox;
+        }
+
+    }while(trocou); // repete enquanto houver troca
+
+}
 // Imprime a cidade inteira
 void Imprimir_Cidade(){
     int achou = 0;
@@ -254,6 +322,7 @@ void Imprimir_Cidade(){
         for (int j = 0; j < COLUNAS; j++){
             if (!Lista_Vazia(cidade[i][j].Eventos)){
                 achou = 1;
+                Ordenar_Regiao(cidade[i][j].Eventos);
                 cout << "===== Regiao [" << i << "][" << j << "] =====" << endl;
                 Imprimir_Lista(cidade[i][j].Eventos);
             }
