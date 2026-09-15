@@ -132,7 +132,7 @@ void Remover_Item(Lista *L, int Valor){
         if(Anterior == NULL){ // Ou seja, se o anterior é null, o atual é o primeiro. Nesse caso, atualizamos o inicio.
             L->Inicio = Atual->Prox; 
         }
-        else{ // Se nao é o primeiro, atualiza atualizamos o prox do item anterior para pular o atual.
+        else{ // Se nao é o primeiro, atualizamos o prox do item anterior para pular o atual.
             Anterior->Prox = Atual->Prox;
         }
 
