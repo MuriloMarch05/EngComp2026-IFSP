@@ -303,7 +303,7 @@ void Ordenar_Regiao(Lista *L){
 
         // Percorre ate o penultimo
         while (Atual->Prox != NULL){
-            // Se a prioridade do atual for MENOR que a do proximo, estao fora de ordem (maior primeiro) -> troca
+            // Se a prioridade do atual for MENOR que a do proximo, estao fora de ordem (maior primeiro), entao troca
             if(Atual->prioridade < Atual->Prox->prioridade){
                 Trocar_Conteudo(Atual, Atual->Prox);
                 trocou = 1;
