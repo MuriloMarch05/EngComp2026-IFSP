@@ -62,7 +62,7 @@ Elemento * Desenfileirar(Fila *F){
 		if (F->Inicio == F->Fim) {
 			//1 elemento
 			F->Inicio = NULL;
-			F->Fim = F->Inicio;
+			F->Fim = NULL;
 		}
 		else{
 			//Mais de 1 elemento
