@@ -95,9 +95,9 @@ bool Validar_Parenteses(Fila *f) {
                 if(Pilha_Vazia(&p)){
                     valido = false;
                 }
-            }
-            else{
+                else{
                 Desempilhar(&p);
+                }
             }
         }
     }
