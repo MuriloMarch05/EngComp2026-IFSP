@@ -1,6 +1,5 @@
 #include <iostream>
 #include <stdlib.h>
-#include <string.h>
 using namespace std;
 struct Elemento{
     char Operador[10];
@@ -56,34 +55,52 @@ void Enfileirar(Fila *F, const char* Op, float Num){
         F->Fim = ptE;
     }	
 }
-Fila Digitar_exp(){
+void Inserir_num(Fila *F, char exp[], int *i){
+    char auxnum[100];
+    int j=0;
+    while(isdigit(exp[*i]) || exp[*i]=='.' && isdigit(exp[*i+1])){
+        auxnum[j]=exp[*i];
+        (*i)++;
+        j++;
+    }
+    auxnum[j]='\0';
+    Enfileirar(F, "#", atof(auxnum));
+}
+void Inserir_op(Fila *F, char exp[], int *i){
+    char Op[3];
+    Op[0] = exp[*i];
+    if(exp[*i] == '(' || exp[*i] == ')') {
+        Op[1] = '\0';
+    }
+    else{
+        if(exp[*i+1] != '\0' && !isdigit(exp[*i+1]) && exp[*i+1] != '(' && exp[*i+1] != ')') {
+            Op[1] = exp[*i+1];
+            Op[2] = '\0';
+            (*i)++;
+        }
+        else{
+            Op[1] = '\0';
+        }
+    }
+    Enfileirar(F, Op, 0);
+}
+Elemento* Digitar_exp(){
     char exp[100];
+    cin.ignore();
     cout<<"\nDigite uma expressão numérica: ";
     cin.getline(exp, 100);
     cout<<endl;
     Fila F;
     Ini_Fila(&F);
-    char Op[2];
     for(int i=0;exp[i]!='\0';i++){
         if(isdigit(exp[i])){
-            char auxnum[100];
-            int j=0;
-            while(isdigit(exp[i])){
-                auxnum[j]=exp[i];
-                j++;
-                i++;
-            }
-            auxnum[j]='\0';
-            i--;
-            Enfileirar(&F, "#", atoi(auxnum));
+            Inserir_num(&F, exp, &i);
         }
         else{
-            Op[0]=exp[i];
-            Op[1]='\0';
-            Enfileirar(&F, Op, 0);
+            Inserir_op(&F, exp, &i);
         }
     }
-    return F;
+    return F.Inicio;
 }
 Elemento * Desenfileirar(Fila *F){
     Elemento *Ret = NULL;
@@ -117,136 +134,96 @@ Elemento * Desempilhar(Pilha *P){
     }
     return Ret;
 }
-float Calcular(float num1, float num2, const char* operador){
-
-    float resultado = 0;
-    switch(operador[0]){
-
-        case '+':
-            resultado = num1 + num2;
-            break;
-        case '-':
-            resultado = num1 - num2;
-            break;
-        case '*':
-            resultado = num1 * num2;
-            break;
-
-        case '/':
-            if(num2 != 0){
-                resultado = num1 / num2;
-                break;
-            }
-            else{
-                cout << "Erro. Divisao por zero." << endl;
-                break;
-            }
-
-        default:
-
-            if(strcmp(operador, ">") == 0){
-                resultado = num1 > num2;
-                break;
-            }
-            else{
-                if(strcmp(operador, "<") == 0){
-                    resultado = num1 < num2;
-                    break;
-                }
-                else{
-                    if(strcmp(operador, "=") == 0){
-                        resultado = num1 == num2;
-                        break;
-                    }
-                    else{
-                        if(strcmp(operador, "!=") == 0){
-                            resultado = num1 != num2;
-                            break;
-                        }
-                        else{
-                            if(strcmp(operador, ">=") == 0){
-                                resultado = num1 >= num2;
-                                break;
-                            }
-                            else{
-                                if(strcmp(operador, "<=") == 0){
-                                    resultado = num1 <= num2;
-                                    break;
-                                }
-                                else{
-                                    if(strcmp(operador, "!") == 0){
-                                        resultado = !num1;
-                                        break;
-                                    }
-                                    else{
-                                        cout << "Operador invalido." << endl;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+float Calculo_parcial(float num1, float num2, char op[]){
+    float retorno;
+    if(!strcmp(op, "+")){
+        retorno=num1+num2;
     }
-
-    return resultado;
+    if(!strcmp(op, "-")){
+        retorno=num1-num2;
+    }
+    if(!strcmp(op, "*") || !strcmp(op, "×")){
+        retorno=num1*num2;
+    }
+    if(!strcmp(op, "÷") || !strcmp(op, "/")){
+        retorno=num1/num2;
+    }
+    if(!strcmp(op, "<")){
+        retorno=(num1<num2);
+    }
+    if(!strcmp(op, ">")){
+        retorno=(num1>num2);
+    }
+    if(!strcmp(op, "<=")){
+        retorno=(num1<=num2);
+    }
+    if(!strcmp(op, ">=")){
+        retorno=(num1>=num2);
+    }
+    if(!strcmp(op, "!=")){
+        retorno=(num1!=num2);
+    }
+    if(!strcmp(op, "=")){
+        retorno=(num1=num2);
+    }
+    return retorno;
 }
 void Resolver_pilha(Pilha *PNum, Pilha *POp){
     float num1, num2;
     char op[10];
     num2=(Desempilhar(PNum))->Numero;
     num1=(Desempilhar(PNum))->Numero;
-    strcpy(op, (Desempilhar(POp))->Operador);
-    Empilhar(PNum, "#", Calcular(num1, num2, op));
+    strcpy(op, Desempilhar(POp)->Operador);
+    Empilhar(PNum, "#", Calculo_parcial(num1, num2, op));
 }
-int preced(const char* operador){
-
-    int prioridade = 0;
-
-    if(strcmp(operador, "!") == 0){
-        prioridade = 4;
+int preced(const char *Op){
+    int precedencia;
+    if(strcmp(Op, "<=")==0 || strcmp(Op, ">=")==0 || strcmp(Op, "<")==0 || strcmp(Op, ">")==0 || strcmp(Op, "!=")==0 || strcmp(Op, "==")==0){
+        precedencia=1;
     }
-    else if(strcmp(operador, "*") == 0 || strcmp(operador, "/") == 0){
-        prioridade = 3;
+    if(strcmp(Op, "+")==0 || strcmp(Op, "-")==0){
+        precedencia=2;
     }
-    else if(strcmp(operador, "+") == 0 || strcmp(operador, "-") == 0){
-        prioridade = 2;
+    if(strcmp(Op, "*")==0 || strcmp(Op, "×")==0 || strcmp(Op, "/")==0 || strcmp(Op, "÷")==0){
+        precedencia=3;
     }
-    else if(strcmp(operador, ">") == 0 || strcmp(operador, "<") == 0 ||
-            strcmp(operador, ">=") == 0 || strcmp(operador, "<=") == 0 ||
-            strcmp(operador, "=") == 0 || strcmp(operador, "!=") == 0){
-        prioridade = 1;
-    }
-
-    return prioridade;
+    return precedencia;
 }
-void Calcular_exp(Fila *F){
+float Calcular_exp(Fila *F){
     Pilha PNum, POp;
     Ini_Pilha(&PNum);
     Ini_Pilha(&POp);
-    Elemento *pto, *aux;
+    Elemento *pto;
     for(pto=F->Inicio;pto!=NULL;pto=pto->Prox){
-        aux=Desenfileirar(F);
-       if(!strcmp(aux->Operador, "#")){
-           Empilhar(&PNum, "#", aux->Numero);
+       if(strcmp(pto->Operador, "#")==0){
+           Empilhar(&PNum, "#", pto->Numero);
        }
        else{
-           if(POp.Topo==NULL){
-               Empilhar(&POp, aux->Operador, 0);
+           if(!strcmp(pto->Operador, "(")){
+               Empilhar(&POp, "(", 0);
            }
            else{
-               if(preced(aux->Operador)<=preced(POp.Topo->Operador) && POp.Topo!=NULL){
-                   while(preced(aux->Operador)<=preced(POp.Topo->Operador)){
+               if(!strcmp(pto->Operador, ")")){
+                   while(!Pilha_Vazia(&POp) && strcmp(pto->Operador, "(")!=0){
                        Resolver_pilha(&PNum, &POp);
+                   }
+                   if(!Pilha_Vazia(&POp)){
+                       free(Desempilhar(&POp));
                    }
                }
                else{
-                   Resolver_pilha(&PNum, &POp);
+                   while(!Pilha_Vazia(&POp) && strcmp(POp.Topo->Operador, "(") != 0 && preced(aux->Operador) <= preced(POp.Topo->Operador)){
+                       Resolver_pilha(&PNum, &POp);
+                   }
+                   Empilhar(&POp, aux->Operador, 0);
                }
            }
        } 
     }
+    while(!Pilha_Vazia(&POp)){
+        Resolver_pilha(&PNum, &POp);
+    }
+    return PNum.Topo->Numero;
 }
 void Menu(){
     int Op;
@@ -255,11 +232,11 @@ void Menu(){
         cout<<"[1] - Inserir expressão\n[2] - Calcular expressão\n[3] - Sair\nOpção: ";
         cin>>Op;
         switch(Op){
-            case 1: F=Digitar_exp();
+            case 1: F.Inicio=Digitar_exp();
                     system("cls");
                     cin.get();
                     break;
-            case 2: Calcular_exp(&F);
+            case 2: cout<<"\nO resultado da expressão é "<<Calcular_exp(&F);
                     system("cls");
                     cin.get();
                     break;
